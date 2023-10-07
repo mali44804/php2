@@ -4,7 +4,7 @@ include('admin/includes/sidebar.php');
 include('admin/includes/topbar.php');
 include('config.php');
 
-$product_query = "SELECT * from products order by id desc";
+$product_query = "SELECT * from `products` as p inner join category as c on p.category = c.ID";
 $conn_query = mysqli_query($connection,$product_query);
 if(mysqli_num_rows($conn_query)>0){
 
@@ -35,7 +35,7 @@ if(mysqli_num_rows($conn_query)>0){
             <tr>
             <th scope="row"><?php echo $pro_data['ID']?></th>
             <td><?php echo $pro_data['title']?></td>
-            <td><?php echo $pro_data['category']?></td>
+            <td><?php echo $pro_data['cname']?></td>
             <td><?php echo $pro_data['description']?></td>
             <td ><img src="<?php echo 'images/' .$pro_data['image']?>" width = "100px" height="100px"></td>
             <td>
@@ -57,7 +57,7 @@ if(mysqli_num_rows($conn_query)>0){
         
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <!-- <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -65,7 +65,7 @@ if(mysqli_num_rows($conn_query)>0){
         <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
-    </nav>
+    </nav> -->
 
     </div>
 
@@ -73,7 +73,13 @@ if(mysqli_num_rows($conn_query)>0){
 
 </div>
 
-}
+
+<?php
+include('admin/includes/footer.php');
+
+?>
+
+
 
 
 

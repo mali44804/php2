@@ -2,7 +2,11 @@
 include('admin/includes/header.php');
 include('admin/includes/sidebar.php');
 include('admin/includes/topbar.php');
+include('config.php');
 
+$product_query = "SELECT * from `category` where status = '1' ";
+$conn_query = mysqli_query($connection,$product_query);
+if(mysqli_num_rows($conn_query)>0){
 ?>
 
 
@@ -17,25 +21,28 @@ include('admin/includes/topbar.php');
             <table class="table table-warning">
                 <thead class="bg-warning p-2 text-dark bg-opacity-10" style="opacity: 75%;">
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                    
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                <?php
+                while($pro_data=mysqli_fetch_assoc($conn_query)){ 
+                ?>
+                <tr>
+                    <th scope="row"><?php echo $pro_data['ID']?></th>
+                    <td><?php echo $pro_data['cname']?></td>
+                    <td><?php echo $pro_data['status']?></td>
+                    
                     <td ><a href="" class="btn btn-success">Update</a></td>
                     <td ><a href="" class="btn btn-danger">Delete</a></td>
                     
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th scope="row">2</th>
                     <td>Jacob</td>
                     <td>Thornton</td>
@@ -50,7 +57,12 @@ include('admin/includes/topbar.php');
                     <td ><a href="" class="btn btn-success">Update</a></td>
                     <td ><a href="" class="btn btn-danger">Delete</a></td>
 
-                    </tr>
+                </tr> -->
+                <?php
+            }
+} 
+        
+        ?>
                 </tbody>
             </table>
             <nav aria-label="Page navigation example">
